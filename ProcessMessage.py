@@ -42,18 +42,12 @@ def is_message_suspicious(message):
     return False
 
 def is_message_malicious(message):
-    # if http, https, www is found as a sequence in the list 
+    # if http, https, www, .com is found as a sequence in the list
+    url_properties = ['http', 'https', '.com', 'www']
+    if any(url_property in message for url_property in url_properties):
+            message_words = message.split()
 
-        # split the message into a list of words 
-
-        # for each word check if https://burksmemorial.com is inside of the word
-
-            # if positive continue loop 
-
-            # if negative 
-
-process_it_sus = "This is a spam message that shouldnt get through the is message suspicious function preventing spam"
-process_it_clean = "This is a message that should be able to pass the suspicious function since the words loving beloved and peace are in it"
-
-print(is_message_suspicious(process_it_sus))
-print(is_message_suspicious(process_it_clean))
+            for word in message_words:
+                if any(url_property in word for url_property in url_properties):
+                    if "burksmemorial.com" not in word:
+                        return True
