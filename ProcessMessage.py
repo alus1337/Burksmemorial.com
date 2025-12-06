@@ -1,6 +1,8 @@
 import json
 
 def is_message_clean(message):
+    # profanity check
+
     message = message.lower()
     try:
         words = open("words.json")
@@ -15,8 +17,10 @@ def is_message_clean(message):
     for word in message_words:
         if word in bad_word_list:
             return False
+        
     return True
 
+# anti spam mainly just checks if common funeral words are used
 def is_message_suspicious(message):
     message.lower()
     try:
@@ -37,6 +41,16 @@ def is_message_suspicious(message):
     
     return False
 
+def is_message_malicious(message):
+    # if http, https, www is found as a sequence in the list 
+
+        # split the message into a list of words 
+
+        # for each word check if https://burksmemorial.com is inside of the word
+
+            # if positive continue loop 
+
+            # if negative 
 
 process_it_sus = "This is a spam message that shouldnt get through the is message suspicious function preventing spam"
 process_it_clean = "This is a message that should be able to pass the suspicious function since the words loving beloved and peace are in it"
